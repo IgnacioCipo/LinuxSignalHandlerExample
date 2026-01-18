@@ -29,3 +29,9 @@ TEST(SignalHandlerTest, HandleSIGUSR2Signal) {
     handler.handleSignal(SIGUSR2);
     EXPECT_FALSE(handler.shouldExit());
 }
+
+TEST(SignalHandlerTest, HandleSIGPIPESignal) {
+    SignalHandler handler;
+    handler.handleSignal(SIGPIPE);
+    EXPECT_FALSE(handler.shouldExit());
+}

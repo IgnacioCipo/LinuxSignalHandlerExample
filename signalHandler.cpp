@@ -51,6 +51,10 @@ void SignalHandler::setupSignalHandlers()
         std::cerr << "Error registering SIGUSR2" << std::endl;
     }
 
+    if (sigaction(SIGPIPE, &sa, nullptr) == -1) { 
+        std::cerr << "error registrating SIGPIPE"<< std::endl;
+    }
+
     std::cout << "Signal handlers configured successfully" << std::endl;
     std::cout << "You can send signals with: kill -SIGUSR1 " << getpid() << std::endl;
 }
@@ -78,6 +82,9 @@ void SignalHandler::handleSignal(int signal)
         case SIGTERM:
             std::cout << "\n[SIGNAL] SIGTERM received. Graceful termination..." << std::endl;
             exitFlag = true;
+            break;
+        case SIGPIPE: 
+            std::cout << "\n[SIGNAL] SIGPIPE received. Broken pipe." << std::endl;
             break;
         case SIGUSR1:
             std::cout << "\n[SIGNAL] SIGUSR1 received. User-defined signal 1." << std::endl;

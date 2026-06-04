@@ -22,6 +22,8 @@ int main(int argc, char* argv[])
     cout << "  - kill -SIGUSR2 " << getpid() << endl;
     cout << "  - kill -SIGTERM " << getpid() << endl;
     cout << "  - kill -SIGINT " << getpid() << endl;
+    cout << "  - kill -SIGSEGV " << getpid() << endl;
+    cout << "  - kill -SIGPIPE " << getpid() << endl;
     cout << endl;
     
     // Main loop - waits for signals

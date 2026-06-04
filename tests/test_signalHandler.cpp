@@ -35,3 +35,9 @@ TEST(SignalHandlerTest, HandleSIGPIPESignal) {
     handler.handleSignal(SIGPIPE);
     EXPECT_FALSE(handler.shouldExit());
 }
+
+TEST(SignalHandlerTest, HandleSIGSEGVSignal) {
+    SignalHandler handler;
+    handler.handleSignal(SIGSEGV);
+    EXPECT_TRUE(handler.shouldExit());
+}

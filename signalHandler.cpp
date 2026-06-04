@@ -51,8 +51,14 @@ void SignalHandler::setupSignalHandlers()
         std::cerr << "Error registering SIGUSR2" << std::endl;
     }
 
+    // Register SIGPIPE (broken pipe)
     if (sigaction(SIGPIPE, &sa, nullptr) == -1) { 
         std::cerr << "error registrating SIGPIPE"<< std::endl;
+    }
+
+    // Register SIGSEGV (segmentation fault)
+    if (sigaction(SIGSEGV, &sa, nullptr) == -1) {
+        std::cerr << "Error registering SIGSEGV" << std::endl;
     }
 
     std::cout << "Signal handlers configured successfully" << std::endl;
@@ -91,6 +97,10 @@ void SignalHandler::handleSignal(int signal)
             break;
         case SIGUSR2:
             std::cout << "\n[SIGNAL] SIGUSR2 received. User-defined signal 2." << std::endl;
+            break;
+        case SIGSEGV:
+            std::cout << "\n[SIGNAL] SIGSEGV received. Segmentation fault." << std::endl;
+            exitFlag = true; 
             break;
         default:
             std::cout << "\n[SIGNAL] Unknown signal: " << signal << std::endl;
